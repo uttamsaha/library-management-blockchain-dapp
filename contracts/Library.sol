@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 
 
-//creating smart contract named library
 contract Library{
 
     struct Book {
@@ -13,15 +12,14 @@ contract Library{
         bool finished;
     }
 
-    Book[] private bookList; //this a list
+    Book[] private bookList;
 
-    mapping(uint256 => address) bookToOwner; //mapping book id to the wallet address owner
+    mapping(uint256 => address) bookToOwner; 
 
     event AddBook(address recipient,uint bookId);
     event SetFinished(uint bookId,bool finished);
 
 
-// function to add book
     function addBook(string memory name,uint16 year,string memory author,bool finished) external {
         uint bookId = bookList.length;
         bookList.push(Book(bookId,name,year,author,finished));
@@ -29,7 +27,6 @@ contract Library{
         emit AddBook(msg.sender, bookId);
     }
 
-// function to getbook fetch book
     function _getBookList(bool finished) private view returns (Book[] memory){
         Book[] memory temporary = new Book[](bookList.length);
 
